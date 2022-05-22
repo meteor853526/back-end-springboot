@@ -27,7 +27,7 @@ public class Product {
   private Long id;
 
   @Column(name = "image")
-  private String photo;
+  private String image;
 
   @Column(name = "name")
   private String name;
@@ -47,31 +47,37 @@ public class Product {
   @Column(name = "數量")
   private int number;
 
+  @Column(name = "owner")
+  private String owner;
 
-  public Product(Long id, String photo, String name, String introduce, String category,int price,String type,int number) {
+
+  public Product(Long id, String image, String name, String introduce, String category,int price,String type,int number,String owner) {
     this.id = id;
-    this.photo = photo;
+    this.image = image;
     this.name = name;
     this.introduce = introduce;
     this.category = category;
     this.price = price;
     this.type = type;
     this.number = number;
-
+    this.owner = owner;
   }
 
-  public Product(String photo, String name, String introduce, String category,int price,String type,int number) {
-    this.photo = photo;
+  public Product(String image, String name, String introduce, String category,int price,String type,int number,String owner) {
+    this.image = image;
     this.name = name;
     this.introduce = introduce;
     this.category = category;
     this.price = price;
     this.type = type;
     this.number = number;
+    this.owner = owner;
   }
 
   public Product() {
   }
+
+
   public Long getId() {
     return id;
   }
@@ -80,12 +86,12 @@ public class Product {
     this.id = id;
   }
 
-  public String getPhoto() {
-    return photo;
+  public String getImage() {
+    return image;
   }
 
-  public void setPhoto(String photo) {
-    this.photo = photo;
+  public void setImage(String photo) {
+    this.image = image;
   }
 
   public String getName() {
@@ -132,9 +138,18 @@ public class Product {
     return number;
   }
 
+  public String getOwner() {
+    return owner;
+  }
+
+  public void setOwner(String owner) {
+    this.owner = owner;
+  }
+
   public void setNumber(int number) {
     this.number = number;
   }
+
   @Override
   public String toString() {
     return "Student{" +

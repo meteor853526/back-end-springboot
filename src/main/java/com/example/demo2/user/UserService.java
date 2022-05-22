@@ -1,7 +1,9 @@
-package com.example.demo2.product;
+package com.example.demo2.user;
 
+
+import com.example.demo2.product.Product;
+import com.example.demo2.product.ProductRepository;
 import com.example.demo2.student.Student;
-import com.example.demo2.student.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,32 +16,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
 @Service
-public class ProductService {
+public class UserService {
 
-  private final ProductRepository productRepository;
+  private final UserRepository userRepository;
 
   @Autowired
-  public ProductService(ProductRepository productRepository) {
-    this.productRepository = productRepository;
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
   }
 
-  public List<Product> getProduct() {
-    return productRepository.findAll();
+  public List<User> getUser() {
+    return userRepository.findAll();
   }
 
-  public List<Product> getOwner(String owner) {
-    return productRepository.findOwnerPD(owner);
-  }
-
-  public String getProductname(int id) {
-    return productRepository.findByID(id);
-  }
-
-  public void  saveProductToDB( String name, int price,String category,String type,int number,String introduce,String owner)
+  public void saveUserToDB(String email, String passwd ,String type)
   {
-    Product p = new Product();
+    User p = new User();
 //    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 //    if(fileName.contains(".."))
 //    {
@@ -50,19 +43,18 @@ public class ProductService {
 //    } catch (IOException e) {
 //      e.printStackTrace();
 //    }
-    p.setIntroduce(introduce);
-    p.setCategory(category);
+    p.setEmail(email);
+    p.setPasswd(passwd);
     p.setType(type);
-    p.setNumber(number);
-    p.setName(name);
-    p.setPrice(price);
-    p.setOwner(owner);
-    productRepository.save(p);
+    //p.setImage(image);
+
+
+    userRepository.save(p);
   }
 
 
 
-  public void addNewProduct(Product product) {
+  public void addUser(User user) {
 //    Optional<Product> productOptional = productRepository.findStudentByEmail(product.getEmail());
 //    if (productOptional.isPresent()) {
 //      throw new IllegalStateException("email taken");
@@ -70,15 +62,36 @@ public class ProductService {
 //    }
 
 
-    productRepository.save(product);
+    userRepository.save(user);
   }
 
-  public void deleteProduct(Long studentId) {
-    boolean exists = productRepository.existsById(studentId);
-    if(!exists) {
-      throw new IllegalStateException("student with id"+ studentId + "does not exist");
+  public String userLogin(User user) {
+    Optional<User> UserOptional = userRepository.findUserByEmail(user.getEmail(), user.getPasswd(),user.getType());
+    System.out.println(user.getEmail()+ user.getPasswd());
+    if(!UserOptional.isPresent()) {
+      throw new IllegalStateException("user with id"+ user.getEmail() + "does not exist");
     }
-    productRepository.deleteById(studentId);
+    return "no";
+
+
+  }
+
+  public Optional<User> userCheck(String email,String passwd,String type) {
+    return userRepository.findUserByEmail(email,passwd,type);
+//    System.out.println(user.getEmail()+ user.getPasswd());
+//    if(UserOptional.isPresent()) {
+//      throw new IllegalStateException("user with id"+ user.getEmail() + "exist");
+//    }
+//    return "no";
+
+
+  }
+  public void deleteUser(Long id) {
+    boolean exists = userRepository.existsById(id);
+    if(!exists) {
+      throw new IllegalStateException("student with id"+ id + "does not exist");
+    }
+    userRepository.deleteById(id);
 
   }
 
