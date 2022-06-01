@@ -32,15 +32,27 @@ public class Order_pdController {
 
   @GetMapping(path = "/buyer")
   public List<Order_pd> getBOrder(@RequestParam("buyer") String buyer) {
-
+    //System.out.println(orderService.getBuyerOrder(buyer));
     return orderService.getBuyerOrder(buyer);
   }
+
+//  @GetMapping(path = "/buyer")
+//  public List<Order_pd> getBOrder(@RequestParam("buyer") String buyer) {
+//    System.out.println(orderService.getBuyerOrder(buyer));
+//    return orderService.getBuyerOrder(buyer);
+//  }
+  @GetMapping(path = "/history")
+  public String gethistoryOrder(@RequestParam("buyer") String buyer) {
+
+    return orderService.getBuyerhistoryOrder(buyer).toString();
+  }
+
 
   @GetMapping(path = "/take")
   public List<Shop_Car> getShop_Car(@RequestParam("email") String email,
                                     @RequestParam("Fname") String Fname,
                                     @RequestParam("Lname") String Lname,
-                                    @RequestParam("phone") int phone,
+                                    @RequestParam("phone") String phone,
                                     @RequestParam("address") String address,
                                     @RequestParam("pay_type") String pay_type,
                                     @RequestParam("delivery_type") String delivery_type,

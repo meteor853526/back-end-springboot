@@ -2,10 +2,13 @@ package com.example.demo2.product;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
+import javax.servlet.MultipartConfigElement;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000/")
 public class ProductController {
   private final ProductService productService;
+
 
   @Autowired
   public ProductController(ProductService productService) {
@@ -30,7 +34,9 @@ public class ProductController {
     return productService.getOwner(owner);
   }
 
-  @RequestMapping(value = "/addP", method = RequestMethod.POST,consumes = "multipart/form-data" )
+
+
+  @RequestMapping(value = "/addP", method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
   public void saveProduct(
                             @RequestParam("name") String name,
                             @RequestParam("price") int price,
@@ -38,9 +44,11 @@ public class ProductController {
                             @RequestParam("type") String type,
                             @RequestParam("number") int number,
                             @RequestParam("introduce") String introduce,
-                            @RequestParam("owner") String owner)
+                            @RequestParam("owner") String owner,
+                            @RequestParam("file") MultipartFile file)
   {
-    productService.saveProductToDB(name, price, category,type,number,introduce,owner);
+    System.out.println(file);
+    productService.saveProductToDB(name, price, category,type,number,introduce,owner,file);
   }
 //  @PostMapping("/addP")
 //

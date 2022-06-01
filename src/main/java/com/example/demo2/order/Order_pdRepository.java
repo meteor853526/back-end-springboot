@@ -14,12 +14,20 @@ public interface Order_pdRepository extends JpaRepository<Order_pd,Long> {
   @Query(value = "select * from order_pd o where o.購買者 = ?1 and o.訂單狀態 = '已出貨'", nativeQuery = true )
   List<Order_pd> findBuyerOrder_pd(String buyer);
 
+  @Query(value = "select * from order_pd o where o.購買者 = ?1 and (o.訂單狀態 = '買方已收貨' or o.訂單狀態 = '已填寫評論')", nativeQuery = true )
+  List<Order_pd> findBuyerhistoryOrder_pd(String buyer);
+
+
   @Modifying(clearAutomatically = true)
-  @Query(value ="update order_pd o set o.訂單狀態 = '待買家收貨' where o.訂單編號 = ?1", nativeQuery = true )
+  @Query(value ="update order_pd o set o.訂單狀態 = '已出貨' where o.訂單編號 = ?1", nativeQuery = true )
   void updateState(int id);
 
   @Modifying(clearAutomatically = true)
-  @Query(value ="update order_pd o set o.訂單狀態 = '買家已收貨' where o.訂單編號 = ?1", nativeQuery = true )
+  @Query(value ="update order_pd o set o.訂單狀態 = '買方已收貨' where o.訂單編號 = ?1", nativeQuery = true )
   void updatebuyState(int id);
+
+  @Modifying(clearAutomatically = true)
+  @Query(value ="update order_pd o set o.訂單狀態 = '已填寫評論' where o.訂單編號 = ?1", nativeQuery = true )
+  void updatebuyCommentState(int id);
 
 }

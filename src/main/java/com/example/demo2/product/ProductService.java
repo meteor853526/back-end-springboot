@@ -37,19 +37,30 @@ public class ProductService {
     return productRepository.findByID(id);
   }
 
-  public void  saveProductToDB( String name, int price,String category,String type,int number,String introduce,String owner)
+  public void  saveProductToDB( String name, int price,String category,String type,int number,String introduce,String owner,MultipartFile file)
   {
     Product p = new Product();
-//    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//    if(fileName.contains(".."))
-//    {
-//      System.out.println("not a a valid file");
-//    }
-//    try {
-//      p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
+    System.out.println(file.toString());
+    String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+    System.out.println(file.getContentType());
+    System.out.println(fileName);
+    if(fileName.contains(".."))
+    {
+      System.out.println("not a a valid file");
+    }
+    try {
+      p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+      //byte[] imageDate = file.getBytes();
+      //System.out.print(imageDate.toString());
+      //p.setImage(imageDate);
+
+      //System.out.println(file.getContentType());
+      //System.out.println(Base64.getEncoder().encodeToString(file.getBytes()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    //System.out.println(p.getImage());
     p.setIntroduce(introduce);
     p.setCategory(category);
     p.setType(type);

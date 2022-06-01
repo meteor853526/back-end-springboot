@@ -5,7 +5,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 @Entity
@@ -26,7 +25,8 @@ public class Product {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "image")
+  @Lob
+  @Column(name = "image", length = Integer.MAX_VALUE,nullable = true ,columnDefinition="BLOB")
   private String image;
 
   @Column(name = "name")
@@ -86,11 +86,11 @@ public class Product {
     this.id = id;
   }
 
-  public String getImage() {
+  public String  getImage() {
     return image;
   }
 
-  public void setImage(String photo) {
+  public void setImage(String image) {
     this.image = image;
   }
 

@@ -23,12 +23,13 @@ public class Shop_CarService {
     return shop_CarRepository.findAll();
   }
 
-  public void addNewShop_Car(String email,int productid,String productName,int price) {
+  public void addNewShop_Car(String email,int productid,String productName,int price, int number) {
     Shop_Car shop_Car = new Shop_Car();
     shop_Car.setEmail(email);
     shop_Car.setProductid(productid);
     shop_Car.setProductName(productName);
     shop_Car.setPrice(price);
+    shop_Car.setNumber(number);
     shop_CarRepository.save(shop_Car);
   }
 

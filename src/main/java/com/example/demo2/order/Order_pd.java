@@ -29,7 +29,7 @@ public class Order_pd {
   private String Lname;
 
   @Column(name = "電話")
-  private int phone;
+  private String phone;
 
   @Column(name = "收貨地址")
   private String address;
@@ -59,7 +59,7 @@ public class Order_pd {
   private int number;
 
 
-  public Order_pd(int id, String fname, String lname, int phone, String address, String type, String pay_type, String time, int productid, String productname, int number,String buyer,String state) {
+  public Order_pd(int id, String fname, String lname, String phone, String address, String type, String pay_type, String time, int productid, String productname, int number,String buyer,String state) {
 
     this.id = id;
     this.Fname = fname;
@@ -76,7 +76,7 @@ public class Order_pd {
     this.state = state;
   }
 
-  public Order_pd(String fname, String lname, int phone, String address, String type, String pay_type, String time, int productid, String productname, int number,String buyer,String state) {
+  public Order_pd(String fname, String lname, String phone, String address, String type, String pay_type, String time, int productid, String productname, int number,String buyer,String state) {
     this.Fname = fname;
     this.Lname = lname;
     this.phone = phone;
@@ -149,11 +149,11 @@ public class Order_pd {
     Lname = lname;
   }
 
-  public int getPhone() {
+  public String getPhone() {
     return phone;
   }
 
-  public void setPhone(int phone) {
+  public void setPhone(String phone) {
     this.phone = phone;
   }
 
@@ -196,5 +196,19 @@ public class Order_pd {
 
   public void setNumber(int number) {
     this.number = number;
+  }
+
+  @Override
+  public String toString() {
+    return "[" +
+      '\"' + id + '\"' + ","+
+      '\"' + productid + '\"' + ","+
+      '\"' + productname + '\"' + ","+
+      '\"' + type + '\"' + ","+
+      '\"' + Pay_type + '\"' + ","+
+      '\"' + number + '\"' + ","+
+      '\"' + time + '\"' + ","+
+      '\"' + state + '\"' +
+      ']';
   }
 }

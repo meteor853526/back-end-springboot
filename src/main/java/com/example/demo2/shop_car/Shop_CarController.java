@@ -29,12 +29,11 @@ public class Shop_CarController {
   public void addshop_Car(@RequestParam("email") String email,
                           @RequestParam("productid") int productid,
                           @RequestParam("productName") String productName,
-                          @RequestParam("price") int price
-
-
+                          @RequestParam("price") int price,
+                          @RequestParam("number") int number
                           ) {
-    System.out.println("??????????????????/");
-    shop_CarService.addNewShop_Car(email,productid,productName,price);
+
+    shop_CarService.addNewShop_Car(email,productid,productName,price,number);
   }
 
   @PutMapping(path = "/addnum")

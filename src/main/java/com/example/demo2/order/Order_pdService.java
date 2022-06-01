@@ -23,6 +23,10 @@ public class Order_pdService {
     return orderRepository.findBuyerOrder_pd(buyer);
   }
 
+  public List<Order_pd> getBuyerhistoryOrder(String buyer) {
+    return orderRepository.findBuyerhistoryOrder_pd(buyer);
+  }
+
   public void  saveOrderToDB(String fname, String lname, int phone, String address, String type, String pay_type, String time, int productid, int number)
   {
     Order_pd p = new Order_pd();
@@ -76,7 +80,10 @@ public class Order_pdService {
     orderRepository.updatebuyState(id);
   }
 
-
+  @Transactional
+  public void updateCommentOrder(int id) {
+    orderRepository.updatebuyCommentState(id);
+  }
 //  @Transactional
 //  public void updateStudent(Long studentId,String name,String email) {
 //    Student student = productRepository.findById(studentId).orElseThrow(
